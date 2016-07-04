@@ -23,7 +23,8 @@
     let postController = new PostController(postView, requester, baseUrl, appKey);
 
     initEventServices();
-    
+
+
     onRoute("#/", function () {
         if (!authService.isLoggedIn()) {
             homeController.showGuestPage();
@@ -69,6 +70,10 @@
         postController.createPost(data);
     });
 
+    bindEventHandler('deletePost', function (ev, data) {
+        homeController.deletePost(data);
+    });
+    
     run('#/');
 
 })();

@@ -19,38 +19,37 @@ class UserController {
 
         this._requester.post(requestUrl, requestData,
             function success(data) {
-                showPopup('success', "Bravo logna se.");
-
+                showPopup('success', "Successfull login.");
                 sessionStorage['_authToken'] = data._kmd.authtoken;
                 sessionStorage['username'] = data.username;
                 sessionStorage['fullname'] = data.fullname;
-
+                sessionStorage['userId'] = data._id;
                 redirectUrl("#/");
             },
             function error(data) {
-                showPopup('error', "Error pri logina.");
+                showPopup('error', "Login error.");
             });
 
     }
 
-    register(requestData) {
-        if (requestData.username.length < 5) {
-            showPopup('error', "Trqbva pone 5km. dulag username.");
+     register(requestData) {
+        if (requestData.username.length < 6) {
+            showPopup('error', "Username too short");
             return;
         }
 
-        if (requestData.fullname.length < 8) {
-            showPopup('error', "Trqbva imeto ti da e pone 8km dulgo.");
+        if (requestData.fullname.length < 6) {
+            showPopup('error', "Full name too short");
             return;
         }
 
         if (requestData.password.length < 6) {
-            showPopup('error', "Trqbva pone 6km. dulga parola.");
+            showPopup('error', "Password too short");
             return;
         }
 
         if (requestData.password !== requestData.confirmPassword) {
-            showPopup('error', "Ne ti suvpadat parolite.");
+            showPopup('error', "Passwords don't mach");
             return;
         }
 

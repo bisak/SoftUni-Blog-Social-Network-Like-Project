@@ -45,8 +45,9 @@ class Requester {
                     if ($("#loader-modal").length) {
                         $("#loader-modal").css("display", "none");
                         $(".wrapper").css("display", "inline-block");
+                        $(".body").css("background-color", "FFF");
                     }
-                }, 1000); //TODO remove delay, here for animation testing purposes
+                }, 0); //TODO remove delay, here for animation testing purposes
             }
         });
     }

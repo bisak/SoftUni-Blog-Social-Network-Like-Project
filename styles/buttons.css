@@ -1,0 +1,7 @@
+.deleteBtn{
+    display: inline-block;
+    height: 40px;
+    width: 80px;
+    background-color: red;
+    font-weight: bold;
+}

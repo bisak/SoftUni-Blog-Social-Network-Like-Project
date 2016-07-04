@@ -42,8 +42,6 @@ class PostView {
                     triggerEvent('createPost', data);
                 });
             })
-
         })
     }
-
 }

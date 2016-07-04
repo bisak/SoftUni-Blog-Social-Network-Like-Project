@@ -5,13 +5,10 @@ class HomeView {
     }
 
 
-
     showGuestPage(sideBarData, mainData) {
-
         Mustache.escape = function (value) {
             return value;
         };
-
         let _that = this;
 
         $.get('templates/welcome-guest.html', function (template) {
@@ -35,12 +32,12 @@ class HomeView {
 
                 let renderedPosts = Mustache.render(template, blogPosts);
                 $('.articles').html(renderedPosts);
+                $(".deleteBtn").hide();
             });
         });
     }
 
     showUserPage(sideBarData, mainData) {
-
         Mustache.escape = function (value) {
             return value;
         };
@@ -65,10 +62,24 @@ class HomeView {
                 let blogPosts = {
                     blogPosts: mainData
                 };
-
                 let renderedPosts = Mustache.render(template, blogPosts);
                 $('.articles').html(renderedPosts);
+
+                for (let i = 0; i < mainData.length; i++) {
+                    let userId = mainData[i]._acl.creator;
+                    if (!(userId == sessionStorage['userId'])) {
+                        $('#del-' + i).hide();
+                    } else {
+                        $('#del-' + i).attr('id', mainData[i]._id);
+                    }
+                }
+
+                $('.deleteBtn').on('click', function (ev) {
+                    let postId = this.id;
+                    triggerEvent('deletePost', postId);
+                });
             });
+
         });
     }
 }
