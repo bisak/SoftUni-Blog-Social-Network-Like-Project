@@ -4,7 +4,8 @@ a {
 }
 
 .dot {
-    margin-top: 13px;
+    vertical-align: middle;
+    margin-top: 20px;
     margin-right: 10px;
     float: left;
     width: 20px;
@@ -13,9 +14,13 @@ a {
 }
 
 .title {
+    vertical-align: middle;
+    display: inline-block;
     font: 32px Oswald;
     font-weight: 600;
     margin-left: 5px;
+    width: 80%;
+    word-break: break-all;
 }
 
 .subtitle {

@@ -75,8 +75,8 @@ class HomeView {
                 }
 
                 $('.deleteBtn').on('click', function (ev) {
-                    let postId = this.id;
-                    triggerEvent('deletePost', postId);
+                    let buttonId = this.id;
+                    triggerEvent('deletePost', buttonId);
                 });
             });
 

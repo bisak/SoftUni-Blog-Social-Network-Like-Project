@@ -68,13 +68,14 @@ class HomeController {
         let key = postId;
         let requestUrl = "https://baas.kinvey.com/appdata/kid_rJCVNesB/posts/?query=" + "{\"_id\":" + "\"" + key + "\"" + "}";
         this._requester.delete(requestUrl,
-            function data(data) {},
+            function data(data) {
+            },
             function success(data) {
-                showPopup('success', "Successfully deleted " + data.count + "post");
+                showPopup('success', "Successfully deleted " + data.count + " post");
                 redirectUrl("#/");
             },
             function error(data) {
-                showPopup('error', "Error when deleting. Error msg => a" + JSON.stringify(data));
+                showPopup('error', "Error when deleting. Error message => " + JSON.stringify(data));
                 redirectUrl("#/");
             }
         )

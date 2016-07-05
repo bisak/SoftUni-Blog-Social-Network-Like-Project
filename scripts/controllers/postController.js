@@ -9,12 +9,16 @@ class PostController {
         this._postView.showCreatePostPage(data, isLoggedIn);
     }
     createPost(requestData) {
-        if (requestData.title.length < 10) {
-            showPopup('error', "Post title must consist of atleast 10 symbols.");
+        if (requestData.title.length > 50) {
+            showPopup('error', "Post title must consist of less than 60 symbols.");
             return;
         }
-        if (requestData.content.length < 50) {
-            showPopup('error', "Post content must consist of atleast 50 symbols.");
+        if (requestData.title.length < 6) {
+            showPopup('error', "Post title must consist of atleast 6 symbols.");
+            return;
+        }
+        if (requestData.content.length < 10) {
+            showPopup('error', "Post content must consist of atleast 10 symbols.");
             return;
         }
         let requestUrl = this._baseServiceUrl;

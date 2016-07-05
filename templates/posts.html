@@ -1,10 +1,12 @@
 {{#blogPosts}}
 <li class="single-post">
     <article id="post-{{postId}}">
-        <div class="dot">&nbsp;</div>
+        <div>
+            <div class="dot">&nbsp;</div>
+            <button class="deleteBtn" id="del-{{postId}}">Delete</button>
         <h3 class="title">{{title}}</h3>
+        </div>
         <p class="subtitle">Posted on {{date}} by {{author}}</p>
-        <button class="deleteBtn" id="del-{{postId}}">Delete</button>
         <div class="content">{{content}}</div>
     </article>
 </li>

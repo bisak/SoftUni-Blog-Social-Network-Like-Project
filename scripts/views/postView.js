@@ -37,6 +37,7 @@ class PostView {
                         author: author,
                         content: content,
                         date: date,
+                        votes: 0
                     };
 
                     triggerEvent('createPost', data);
