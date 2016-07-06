@@ -54,7 +54,7 @@
     onRoute('#/posts/create', function () {
         let data = {
             fullname: sessionStorage['fullname']
-        };
+        };//TODO remove taq groznotiq? che ne mi haresva
         postController.showCreatePostPage(data, authService.isLoggedIn());
     });
 
@@ -72,6 +72,10 @@
 
     bindEventHandler('deletePost', function (ev, data) {
         homeController.deletePost(data);
+    });
+
+    bindEventHandler('ratePost', function (ev, data) {
+        homeController.ratePost(data);
     });
     
     run('#/');

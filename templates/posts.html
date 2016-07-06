@@ -3,11 +3,14 @@
     <article id="post-{{postId}}">
         <div>
             <div class="dot">&nbsp;</div>
+            <button class="likeBtn" id="like-{{postId}}">Like</button>
             <button class="deleteBtn" id="del-{{postId}}">Delete</button>
         <h3 class="title">{{title}}</h3>
         </div>
         <p class="subtitle">Posted on {{date}} by {{author}}</p>
+        <p class="votesDisplay" id="display-{{postId}}">Rating: {{votes}}</p>
         <div class="content">{{content}}</div>
     </article>
+
 </li>
 {{/blogPosts}}

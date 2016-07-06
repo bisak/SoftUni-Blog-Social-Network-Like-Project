@@ -34,22 +34,22 @@ class UserController {
 
      register(requestData) {
         if (requestData.username.length < 6) {
-            showPopup('error', "Username too short");
+            showPopup('error', "Username too short.");
             return;
         }
 
         if (requestData.fullname.length < 6) {
-            showPopup('error', "Full name too short");
+            showPopup('error', "Full name too short.");
             return;
         }
 
         if (requestData.password.length < 6) {
-            showPopup('error', "Password too short");
+            showPopup('error', "Password too short.");
             return;
         }
 
         if (requestData.password !== requestData.confirmPassword) {
-            showPopup('error', "Passwords don't mach");
+            showPopup('error', "Passwords don't mach.");
             return;
         }
 
@@ -59,11 +59,15 @@ class UserController {
 
         this._requester.post(requestUrl, requestData,
             function success(data) {
-                showPopup('success', "Bravo registrira se.");
-                redirectUrl("#/login");
+                showPopup('success', "Successfull registration.");
+                let loginData = {
+                    username: data.username,
+                    password: data.password
+                };
+                triggerEvent('login', data);
             },
             function error(data) {
-                showPopup('error', "Error pri registraciqta.");
+                showPopup('error', "Registration error.");
             });
     }
 

@@ -32,7 +32,10 @@ class HomeView {
 
                 let renderedPosts = Mustache.render(template, blogPosts);
                 $('.articles').html(renderedPosts);
+
                 $(".deleteBtn").hide();
+                $(".likeBtn").hide();
+                $(".downvoteBtn").hide();
             });
         });
     }
@@ -46,17 +49,17 @@ class HomeView {
 
         $.get('templates/welcome-user.html', function (template) {
             let renderedWrapper = Mustache.render(template, null);
-
             $(_that._wrapperSelector).html(renderedWrapper);
+
 
             $.get('templates/recent-posts.html', function (template) {
                 let recentPosts = {
                     recentPosts: sideBarData
                 };
-
                 let renderedRecentPosts = Mustache.render(template, recentPosts);
                 $('.recent-posts').html(renderedRecentPosts);
             });
+
 
             $.get('templates/posts.html', function (template) {
                 let blogPosts = {
@@ -65,21 +68,36 @@ class HomeView {
                 let renderedPosts = Mustache.render(template, blogPosts);
                 $('.articles').html(renderedPosts);
 
+
                 for (let i = 0; i < mainData.length; i++) {
                     let userId = mainData[i]._acl.creator;
-                    if (!(userId == sessionStorage['userId'])) {
-                        $('#del-' + i).hide();
-                    } else {
+
+                    if (userId == sessionStorage['userId']) {
                         $('#del-' + i).attr('id', mainData[i]._id);
+                    } else {
+                        $('#del-' + i).hide();
                     }
+                    $('#like-' + i).attr('id', mainData[i]._id);
+                    $('#display-' + i).attr('id', "display-" + mainData[i]._id);
                 }
 
                 $('.deleteBtn').on('click', function (ev) {
                     let buttonId = this.id;
                     triggerEvent('deletePost', buttonId);
                 });
-            });
 
+                $('.likeBtn').on('click', function (ev) {
+                    let postId = this.id;
+                    for (let i = 0; i < mainData.length; i++) {
+                        if (mainData[i]._id == postId) {
+                            var updateData = mainData[i];
+                            updateData.votes += 1;
+                            break;
+                        }
+                    }
+                    triggerEvent('ratePost', updateData);
+                });
+            });
         });
     }
 }

@@ -34,7 +34,7 @@ class Requester {
             beforeSend: function () {
                 if ($("#loader-modal").length) {
                     $("#loader-modal").css("display", "block");
-                    $(".wrapper").css("display", "none");
+                   // $(".wrapper").css("display", "none");
 
                 }
             },
@@ -48,7 +48,8 @@ class Requester {
                         $(".body").css("background-color", "FFF");
                     }
                 }, 0); //TODO remove delay, here for animation testing purposes
-            }
+            },
+            //async: false
         });
     }
 

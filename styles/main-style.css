@@ -19,11 +19,17 @@ a {
     font: 32px Oswald;
     font-weight: 600;
     margin-left: 5px;
-    width: 80%;
+    width: 60%;
     word-break: break-all;
 }
 
 .subtitle {
+    font: 16px Lato;
+    font-weight: 100;
+    margin-left: 3%;
+}
+
+.votesDisplay {
     font: 16px Lato;
     font-weight: 100;
     margin-left: 3%;

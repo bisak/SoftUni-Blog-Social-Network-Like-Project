@@ -8,7 +8,6 @@
     margin: 0 auto;
     padding: 20px;
     border-radius: 20px;
-
 }
 
 #editor-title {
@@ -33,22 +32,8 @@
 
 .content-field {
     resize: none;
-    border: 3px solid #f2f2f2;
-    outline: none;
     width: 550px;
     height: 300px;
-    border-radius: 15px;
-    text-align: left;
-    font: 12px Lato-Light;
-    padding: 10px;
 }
-
-.content-field:focus {
-    font: 12px Lato;
-    font-weight: 100;
-    outline: none;
-    border: 3px solid #06c0ab;
-}
-
 
 

@@ -31,15 +31,22 @@ class PostView {
                     let author = $('#author').val();
                     let content = tinyMCE.get('content').getContent();
                     let date = moment().format("MMMM Do YYYY");
-
+                    let permissions = {
+                        creator: sessionStorage['userId'],
+                        gr: true,
+                        gw: true
+                    };
+                    let perms = JSON.stringify(permissions);
                     let data = {
+                        _acl: permissions,
                         title: title,
                         author: author,
                         content: content,
                         date: date,
-                        votes: 0
+                        votes: 0,
+                        voters: null
                     };
-
+                    console.log(permissions);
                     triggerEvent('createPost', data);
                 });
             })

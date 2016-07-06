@@ -3,6 +3,14 @@
     height: 30px;
     width: 60px;
     background-color: red;
-    font-size: 0.8em;
+    font-size: 0.6em;
+    font-weight: bold;
+}
+.likeBtn {
+    vertical-align: middle;
+    height: 30px;
+    width: 60px;
+    background-color: green;
+    font-size: 0.6em;
     font-weight: bold;
 }
