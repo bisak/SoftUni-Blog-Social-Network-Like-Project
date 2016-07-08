@@ -36,7 +36,6 @@ class PostView {
                         gr: true,
                         gw: true
                     };
-                    let perms = JSON.stringify(permissions);
                     let data = {
                         _acl: permissions,
                         title: title,
@@ -46,7 +45,6 @@ class PostView {
                         votes: 0,
                         voters: null
                     };
-                    console.log(permissions);
                     triggerEvent('createPost', data);
                 });
             })

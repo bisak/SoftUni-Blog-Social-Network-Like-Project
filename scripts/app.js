@@ -47,6 +47,10 @@
         userController.showRegisterPage(authService.isLoggedIn());
     });
 
+    onRoute("#/users", function () {
+        userController.showUsersPage();
+    });
+    
     onRoute("#/logout", function () {
         userController.logout();
     });

@@ -83,7 +83,7 @@ class HomeController {
         let requestUrlPost = this._baseServiceUrl + /appdata/ + this._appkey + "/posts/" + postId;
 
         let currentPostData;
-        $.ajaxSetup({async: false}); //This is incredibly stupid but hey it's something. (probably better than disabling it full-time!)
+        $.ajaxSetup({async: false}); //This is incredibly stupid but it's something. (probably better than disabling it full-time!)
         this._requester.get(requestUrlPost,
             function success(data) {
                 currentPostData = data;
@@ -114,7 +114,7 @@ class HomeController {
             currentPostData.votes -= 1;
         } else {
             currentPostData.votes += 1;
-            currentPostData.voters.push(sessionStorage['userId']);
+            currentPostData.voters.push(sessionStorage['userId']); //TODO fix sessionStorage...
         }
 
 

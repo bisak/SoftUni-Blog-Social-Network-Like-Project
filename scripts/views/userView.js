@@ -79,4 +79,29 @@ class UserView {
             });
         });
     }
+    
+    showUsersPage(sidebarData, mainData) {
+        let _that = this;
+        $.get('templates/welcome-user.html', function (template) {
+            let renderedWrapper = Mustache.render(template, null);
+            $(_that._wrapperSelector).html(renderedWrapper);
+            
+            $.get('templates/recent-posts.html', function (template) {
+                let recentPosts = {
+                    recentPosts: sidebarData //TODO fix these
+                };
+                console.log(recentPosts);
+                let renderedRecentPosts = Mustache.render(template, recentPosts);
+                $('.recent-posts').html(renderedRecentPosts);
+            });
+            
+            $.get('templates/users.html', function (template) {
+                let blogUsers = {
+                    blogUsers: mainData
+                };
+                let renderedUsers = Mustache.render(template, blogUsers);
+                $('.articles').html(renderedUsers);
+            });
+        });
+    }
 }

@@ -13,23 +13,19 @@ class HomeView {
 
         $.get('templates/welcome-guest.html', function (template) {
             let renderedWrapper = Mustache.render(template, null);
-
             $(_that._wrapperSelector).html(renderedWrapper);
 
             $.get('templates/recent-posts.html', function (template) {
                 let recentPosts = {
                     recentPosts: sideBarData
                 };
-
                 let renderedRecentPosts = Mustache.render(template, recentPosts);
                 $('.recent-posts').html(renderedRecentPosts);
             });
-
             $.get('templates/posts.html', function (template) {
                 let blogPosts = {
                     blogPosts: mainData
                 };
-
                 let renderedPosts = Mustache.render(template, blogPosts);
                 $('.articles').html(renderedPosts);
 
@@ -88,7 +84,7 @@ class HomeView {
 
                 $('.likeBtn').on('click', function (ev) {
                     let postId = this.id;
-                    for (let i = 0; i < mainData.length; i++) {
+                    for (let i = 0; i < mainData.length; i++) {  //TODO fix this! WILL SLEEP! WILL SLEEP VERY VERY HARD!
                         if (mainData[i]._id == postId) {
                             var updateData = mainData[i];
                             updateData.votes += 1;
