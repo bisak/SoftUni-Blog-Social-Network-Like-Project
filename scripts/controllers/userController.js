@@ -27,7 +27,7 @@ class UserController {
                     return date2 - date1;
                 });
 
-                for (let i = 0; i < data.length; i++) {
+                for (let i = 0; i < data.length && i < 5; i++) {
                     recentPosts.push(data[i]);
                 }
                 _that._userView.showUsersPage(recentPosts, data)

@@ -47,16 +47,29 @@ class HomeController {
 
         this._requester.get(requestUrl,
             function success(data) {
-                if (sorting == "votes") {
+                if (sorting == "votes-high") {
                     data.sort(function (elem1, elem2) {
                         let date1 = new Date(elem1.votes);
                         let date2 = new Date(elem2.votes);
                         return date2 - date1;
                     });
-                } else if (sorting == "date") {
+                } else if (sorting == "votes-low") {
+                    data.sort(function (elem1, elem2) {
+                        let date2 = new Date(elem1.votes);
+                        let date1 = new Date(elem2.votes);
+                        return date2 - date1;
+                    });
+                }
+                else if (sorting == "newest") {
                     data.sort(function (elem1, elem2) {
                         let date1 = new Date(elem1._kmd.ect);
                         let date2 = new Date(elem2._kmd.ect);
+                        return date2 - date1;
+                    });
+                } else if (sorting == "oldest") {
+                    data.sort(function (elem1, elem2) {
+                        let date2 = new Date(elem1._kmd.ect);
+                        let date1 = new Date(elem2._kmd.ect);
                         return date2 - date1;
                     });
                 }

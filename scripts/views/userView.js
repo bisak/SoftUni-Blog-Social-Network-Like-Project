@@ -91,7 +91,8 @@ class UserView {
             let renderedWrapper = Mustache.render(template, null);
             $(_that._wrapperSelector).html(renderedWrapper);
             $("#sort-selector").hide();
-
+            document.getElementById("recentsName").innerHTML = "Recent Users";
+            
             $.get('templates/recent-users.html', function (template) {
                 let recentUsers = {
                     recentUsers: sideBarData
