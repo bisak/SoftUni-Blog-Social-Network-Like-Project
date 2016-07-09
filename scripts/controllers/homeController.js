@@ -52,7 +52,7 @@ class HomeController {
                     data[i].postId = i;
                     recentPosts.push(data[i]);
                 }
-
+                console.log(recentPosts);
                 _that._homeView.showUserPage(recentPosts, data)
             },
             function error(data) {

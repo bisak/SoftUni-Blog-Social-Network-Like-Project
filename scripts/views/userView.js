@@ -66,11 +66,16 @@ class UserView {
                     let password = $('#password').val();
                     let fullname = $('#full-name').val();
                     let confirmPassword = $('#pass-confirm').val();
+                    let interests = $('#interests').val();
+                    let birthday = $('#birthday').val();
+                    let age = getAge(birthday);
 
                     let data = {
                         username: username,
                         password: password,
                         fullname: fullname,
+                        interests: interests,
+                        age: age,
                         confirmPassword: confirmPassword
                     };
 
@@ -79,22 +84,21 @@ class UserView {
             });
         });
     }
-    
-    showUsersPage(sidebarData, mainData) {
+
+    showUsersPage(sideBarData, mainData) {
         let _that = this;
         $.get('templates/welcome-user.html', function (template) {
             let renderedWrapper = Mustache.render(template, null);
             $(_that._wrapperSelector).html(renderedWrapper);
-            
-            $.get('templates/recent-posts.html', function (template) {
-                let recentPosts = {
-                    recentPosts: sidebarData //TODO fix these
+
+            $.get('templates/recent-users.html', function (template) {
+                let recentUsers = {
+                    recentUsers: sideBarData
                 };
-                console.log(recentPosts);
-                let renderedRecentPosts = Mustache.render(template, recentPosts);
-                $('.recent-posts').html(renderedRecentPosts);
+                let renderedRecentUsers = Mustache.render(template, recentUsers);
+                $('.recent-posts').html(renderedRecentUsers);
             });
-            
+
             $.get('templates/users.html', function (template) {
                 let blogUsers = {
                     blogUsers: mainData

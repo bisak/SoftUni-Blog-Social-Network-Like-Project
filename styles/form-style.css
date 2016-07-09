@@ -45,6 +45,25 @@ input:focus {
     border: 3px solid #06c0ab;
 }
 
+#interests{
+    border-radius: 30px;
+    border: 3px solid #f2f2f2;
+    width: 60%;
+    height: 35px;
+    margin: 0 auto 10px;
+    height: 70px;
+    word-break: break-word;
+    padding: 15px;
+    resize: none;
+}
+
+#interests:focus {
+    font: 12px Lato;
+    font-weight: 100;
+    outline: none;
+    border: 3px solid #06c0ab;
+}
+
 button {
     font: 16px Lato;
     color: white;

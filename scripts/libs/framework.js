@@ -231,7 +231,17 @@ function initHtmlEditor() {
             {title: 'Test template 2', content: 'Test 2'}
         ],
         content_css: '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-
         forced_root_block: ''
     });
+}
+
+function getAge(dateString) {
+    var today = new Date();
+    var birthDate = new Date(dateString);
+    var age = today.getFullYear() - birthDate.getFullYear();
+    var m = today.getMonth() - birthDate.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+    }
+    return age;
 }

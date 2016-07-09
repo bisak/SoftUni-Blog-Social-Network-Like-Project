@@ -13,8 +13,8 @@ class UserController {
     showRegisterPage(isLoggedIn) {
         this._userView.showRegisterPage(isLoggedIn);
     }
-    
-    showUsersPage(){
+
+    showUsersPage() {
         let _that = this;
         let recentPosts = [];
         let requestUrl = this._baseServiceUrl;
@@ -28,7 +28,7 @@ class UserController {
                 });
 
                 for (let i = 0; i < data.length; i++) {
-                    recentPosts.push(data[i].username);
+                    recentPosts.push(data[i]);
                 }
                 _that._userView.showUsersPage(recentPosts, data)
             },
@@ -56,7 +56,7 @@ class UserController {
 
     }
 
-     register(requestData) {
+    register(requestData) {
         if (requestData.username.length < 6) {
             showPopup('error', "Username too short.");
             return;
@@ -72,10 +72,21 @@ class UserController {
             return;
         }
 
+        if (requestData.interests.length > 100) {
+            showPopup('error', "Too many interests");
+            return;
+        }
+
+        if (requestData.age < 14) {
+            showPopup('error', "Should be 14 or older to register");
+            return;
+        }
+
         if (requestData.password !== requestData.confirmPassword) {
             showPopup('error', "Passwords don't mach.");
             return;
         }
+
 
         delete requestData['confirmPassword'];
 
@@ -84,10 +95,6 @@ class UserController {
         this._requester.post(requestUrl, requestData,
             function success(data) {
                 showPopup('success', "Successfull registration.");
-                let loginData = {
-                    username: data.username,
-                    password: data.password
-                };
                 triggerEvent('login', data);
             },
             function error(data) {
