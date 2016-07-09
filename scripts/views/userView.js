@@ -90,6 +90,7 @@ class UserView {
         $.get('templates/welcome-user.html', function (template) {
             let renderedWrapper = Mustache.render(template, null);
             $(_that._wrapperSelector).html(renderedWrapper);
+            $("#sort-selector").hide();
 
             $.get('templates/recent-users.html', function (template) {
                 let recentUsers = {

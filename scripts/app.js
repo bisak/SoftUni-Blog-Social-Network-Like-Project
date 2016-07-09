@@ -23,8 +23,7 @@
     let postController = new PostController(postView, requester, baseUrl, appKey);
 
     initEventServices();
-
-
+    
     onRoute("#/", function () {
         if (!authService.isLoggedIn()) {
             homeController.showGuestPage();
@@ -50,7 +49,7 @@
     onRoute("#/users", function () {
         userController.showUsersPage();
     });
-    
+
     onRoute("#/logout", function () {
         userController.logout();
     });
@@ -81,7 +80,11 @@
     bindEventHandler('ratePost', function (ev, data) {
         homeController.ratePost(data);
     });
-    
+
+    bindEventHandler('sortPosts', function (ev, data) {
+        homeController.showUserPage(data);
+    });
+
     run('#/');
 
 })();

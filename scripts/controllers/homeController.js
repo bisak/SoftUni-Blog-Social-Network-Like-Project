@@ -34,25 +34,37 @@ class HomeController {
         );
     }
 
-    showUserPage() {
+    showUserPage(sorting) {
         let _that = this;
         let recentPosts = [];
 
         let requestUrl = this._baseServiceUrl + /appdata/ + this._appkey + "/posts";
 
+        if (sorting == undefined) {
+            sorting = "votes";
+        }
+
+
         this._requester.get(requestUrl,
             function success(data) {
-                data.sort(function (elem1, elem2) {
-                    let date1 = new Date(elem1.votes);//_kmd.ect //TODO SORTING
-                    let date2 = new Date(elem2.votes);
-                    return date2 - date1;
-                });
+                if (sorting == "votes") {
+                    data.sort(function (elem1, elem2) {
+                        let date1 = new Date(elem1.votes);
+                        let date2 = new Date(elem2.votes);
+                        return date2 - date1;
+                    });
+                } else if (sorting == "date") {
+                    data.sort(function (elem1, elem2) {
+                        let date1 = new Date(elem1._kmd.ect);
+                        let date2 = new Date(elem2._kmd.ect);
+                        return date2 - date1;
+                    });
+                }
 
                 for (let i = 0; i < data.length; i++) {
                     data[i].postId = i;
                     recentPosts.push(data[i]);
                 }
-                console.log(recentPosts);
                 _that._homeView.showUserPage(recentPosts, data)
             },
             function error(data) {

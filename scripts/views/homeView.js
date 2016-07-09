@@ -65,7 +65,7 @@ class HomeView {
                 $('.articles').html(renderedPosts);
 
 
-                for (let i = 0; i < mainData.length; i++) {
+                for (let i = 0; i < mainData.length; i++) { //THIS WILL SLEEP!
                     let userId = mainData[i]._acl.creator;
 
                     if (userId == sessionStorage['userId']) {
@@ -77,14 +77,21 @@ class HomeView {
                     $('#display-' + i).attr('id', "display-" + mainData[i]._id);
                 }
 
-                $('.deleteBtn').on('click', function (ev) {
+                $('.deleteBtn').on('click', function (e) {
                     let buttonId = this.id;
-                    triggerEvent('deletePost', buttonId);
+                    vex.dialog.confirm({
+                        message: 'Delete post?',
+                        callback: function(value) {
+                            if(value){
+                                triggerEvent('deletePost', buttonId);
+                            }
+                        }
+                    });
                 });
 
                 $('.likeBtn').on('click', function (ev) {
                     let postId = this.id;
-                    for (let i = 0; i < mainData.length; i++) {  //TODO fix this! WILL SLEEP! WILL SLEEP VERY VERY HARD!
+                    for (let i = 0; i < mainData.length; i++) {  //WILL SLEEP!
                         if (mainData[i]._id == postId) {
                             var updateData = mainData[i];
                             updateData.votes += 1;
@@ -92,6 +99,10 @@ class HomeView {
                         }
                     }
                     triggerEvent('ratePost', updateData);
+                });
+
+                $("#sort-selector").on('change', function () {
+                    triggerEvent('sortPosts', this.value)
                 });
             });
         });
