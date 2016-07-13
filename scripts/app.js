@@ -23,7 +23,7 @@
     let postController = new PostController(postView, requester, baseUrl, appKey);
 
     initEventServices();
-    
+
     onRoute("#/", function () {
         if (!authService.isLoggedIn()) {
             homeController.showGuestPage();
@@ -57,7 +57,7 @@
     onRoute('#/posts/create', function () {
         let data = {
             fullname: sessionStorage['fullname']
-        };//TODO remove taq groznotiq? che ne mi haresva
+        };//TODO fix??
         postController.showCreatePostPage(data, authService.isLoggedIn());
     });
 
@@ -79,6 +79,14 @@
 
     bindEventHandler('ratePost', function (ev, data) {
         homeController.ratePost(data);
+    });
+
+    bindEventHandler('editPost', function (ev, data) {
+        postController.showEditPostPage(data, authService.isLoggedIn());
+    });
+
+    bindEventHandler('editPostRequest', function (ev, data) {
+        postController.editPost(data);
     });
 
     bindEventHandler('sortPosts', function (ev, data) {

@@ -41,7 +41,7 @@ class HomeController {
         let requestUrl = this._baseServiceUrl + /appdata/ + this._appkey + "/posts";
 
         if (sorting == undefined) {
-            sorting = "votes";
+            sorting = "votes-high";
         }
 
 
@@ -108,7 +108,7 @@ class HomeController {
         let requestUrlPost = this._baseServiceUrl + /appdata/ + this._appkey + "/posts/" + postId;
 
         let currentPostData;
-        $.ajaxSetup({async: false}); //This is incredibly stupid but it's something. (probably better than disabling it full-time!)
+        $.ajaxSetup({async: false}); //stupid
         this._requester.get(requestUrlPost,
             function success(data) {
                 currentPostData = data;
@@ -154,4 +154,5 @@ class HomeController {
         );
         $.ajaxSetup({async: true});
     }
+
 }

@@ -32,6 +32,7 @@ class HomeView {
                 $(".deleteBtn").hide();
                 $(".likeBtn").hide();
                 $(".downvoteBtn").hide();
+                $(".editBtn").hide();
             });
         });
     }
@@ -64,25 +65,27 @@ class HomeView {
                 let renderedPosts = Mustache.render(template, blogPosts);
                 $('.articles').html(renderedPosts);
 
-
                 for (let i = 0; i < mainData.length; i++) { //THIS WILL SLEEP!
                     let userId = mainData[i]._acl.creator;
 
                     if (userId == sessionStorage['userId']) {
                         $('#del-' + i).attr('id', mainData[i]._id);
+                        $('#like-' + i).attr('id', mainData[i]._id);
                     } else {
                         $('#del-' + i).hide();
+                        $('#like-' + i).hide();
                     }
-                    $('#like-' + i).attr('id', mainData[i]._id);
+                    $('#edit-' + i).attr('id', mainData[i]._id);
                     $('#display-' + i).attr('id', "display-" + mainData[i]._id);
+                    $('#content-' + i).attr('id', "content-" + mainData[i]._id);
                 }
 
                 $('.deleteBtn').on('click', function (e) {
                     let buttonId = this.id;
                     vex.dialog.confirm({
                         message: 'Delete post?',
-                        callback: function(value) {
-                            if(value){
+                        callback: function (value) {
+                            if (value) {
                                 triggerEvent('deletePost', buttonId);
                             }
                         }
@@ -90,16 +93,29 @@ class HomeView {
                 });
 
                 $('.likeBtn').on('click', function (ev) {
+                    let updateData;
                     let postId = this.id;
                     for (let i = 0; i < mainData.length; i++) {  //WILL SLEEP!
                         if (mainData[i]._id == postId) {
-                            var updateData = mainData[i];
-                            updateData.votes += 1;
+                            updateData = mainData[i];
                             break;
                         }
                     }
                     triggerEvent('ratePost', updateData);
                 });
+
+                $('.editBtn').on('click', function (ev) {
+                    let updateData;
+                    let postId = this.id;
+                    for (let i = 0; i < mainData.length; i++) {  //WILL SLEEP!
+                        if (mainData[i]._id == postId) {
+                            updateData = mainData[i];
+                            break;
+                        }
+                    }
+                    triggerEvent('editPost', updateData);
+                });
+
 
                 $("#sort-selector").on('change', function () {
                     triggerEvent('sortPosts', this.value)

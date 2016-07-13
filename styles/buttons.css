@@ -1,16 +1,24 @@
 .deleteBtn{
     vertical-align: middle;
-    height: 30px;
-    width: 60px;
+    height: 25px;
+    width: 50px;
     background-color: red;
     font-size: 0.6em;
     font-weight: bold;
 }
 .likeBtn {
     vertical-align: middle;
-    height: 30px;
-    width: 60px;
+    height: 25px;
+    width: 50px;
     background-color: green;
+    font-size: 0.6em;
+    font-weight: bold;
+}
+.editBtn {
+    vertical-align: middle;
+    height: 25px;
+    width: 50px;
+    background-color: orange;
     font-size: 0.6em;
     font-weight: bold;
 }

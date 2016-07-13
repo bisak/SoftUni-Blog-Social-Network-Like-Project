@@ -5,9 +5,15 @@ class PostController {
         this._appId = appId;
         this._baseServiceUrl = baseUrl + "/appdata/" + appId + "/posts/";
     }
+
     showCreatePostPage(data, isLoggedIn) {
         this._postView.showCreatePostPage(data, isLoggedIn);
     }
+
+    showEditPostPage(data, isLoggedIn) {
+        this._postView.showEditPostPage(data, isLoggedIn);
+    }
+
     createPost(requestData) {
         if (requestData.title.length > 50) {
             showPopup('error', "Post title must consist of less than 60 symbols.");
@@ -31,4 +37,31 @@ class PostController {
                 showPopup('error', "An error has occurred while attempting to create a new post.");
             });
     }
+
+    editPost(requestData) {
+        if (requestData.title.length > 50) {
+            showPopup('error', "Post title must consist of less than 60 symbols.");
+            return;
+        }
+        if (requestData.title.length < 6) {
+            showPopup('error', "Post title must consist of atleast 6 symbols.");
+            return;
+        }
+        if (requestData.content.length < 10) {
+            showPopup('error', "Post content must consist of atleast 10 symbols.");
+            return;
+        }
+        let requestUrl = this._baseServiceUrl + requestData._id;
+        delete requestData.postId;
+        console.log(requestData);
+        this._requester.put(requestUrl, requestData,
+            function success(data) {
+                showPopup('success', "You have successfully created a new post.");
+                redirectUrl("#/");
+            },
+            function error(data) {
+                showPopup('error', "An error has occurred while attempting to create a new post.");
+            });
+    }
+
 }
