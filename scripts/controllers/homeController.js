@@ -137,9 +137,11 @@ class HomeController {
 
         if (hasVoted == true) {
             currentPostData.votes -= 1;
+            document.getElementById("like-" + postId).innerHTML = "Like";
         } else {
             currentPostData.votes += 1;
             currentPostData.voters.push(sessionStorage['userId']); //TODO fix sessionStorage...
+            document.getElementById("like-" + postId).innerHTML = "Unlike";
         }
 
 

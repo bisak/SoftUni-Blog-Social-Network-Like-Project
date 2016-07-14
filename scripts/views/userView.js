@@ -92,7 +92,7 @@ class UserView {
             $(_that._wrapperSelector).html(renderedWrapper);
             $("#sort-selector").hide();
             document.getElementById("recentsName").innerHTML = "Recent Users";
-            
+
             $.get('templates/recent-users.html', function (template) {
                 let recentUsers = {
                     recentUsers: sideBarData
@@ -107,6 +107,38 @@ class UserView {
                 };
                 let renderedUsers = Mustache.render(template, blogUsers);
                 $('.articles').html(renderedUsers);
+
+                for (let i = 3; i < mainData.length; i++) {
+                    $("#user-" + i).hide();
+                }
+
+                let first = 3;
+                let second = first + 3;
+                $("#forward").on('click', function () {
+                    if (first < mainData.length) {
+                        for (let i = first; i < second; i++) {
+                            $("#user-" + i).show();
+                        }
+                        for (let i = 0; i < first; i++) {
+                            $("#user-" + i).hide();
+                        }
+                        first = second;
+                        second = first + 3;
+                    }
+                });
+
+                $("#backward").on('click', function () {
+                    if (first > 3) {
+                        for (let i = 0; i < mainData.length; i++) {
+                            $("#user-" + i).hide();
+                        }
+                        for (let i = first - 6; i < first - 3; i++) {
+                            $("#user-" + i).show();
+                        }
+                        first = first - 3;
+                        second = second - 3;
+                    }
+                });
             });
         });
     }

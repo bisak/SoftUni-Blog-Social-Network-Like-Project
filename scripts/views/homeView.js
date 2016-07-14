@@ -47,7 +47,7 @@ class HomeView {
         $.get('templates/welcome-user.html', function (template) {
             let renderedWrapper = Mustache.render(template, null);
             $(_that._wrapperSelector).html(renderedWrapper);
-
+            $('.pagination').hide();
 
             $.get('templates/recent-posts.html', function (template) {
                 let recentPosts = {
@@ -65,28 +65,35 @@ class HomeView {
                 let renderedPosts = Mustache.render(template, blogPosts);
                 $('.articles').html(renderedPosts);
 
-                for (let i = 0; i < mainData.length; i++) { //THIS WILL SLEEP!
+                for (let i = 0; i < mainData.length; i++) {
                     let userId = mainData[i]._acl.creator;
-
                     if (userId == sessionStorage['userId']) {
-                        $('#del-' + i).attr('id', mainData[i]._id);
-                        $('#like-' + i).attr('id', mainData[i]._id);
+                        $('#del-' + i).attr('id', "del-" + mainData[i]._id);
+                        $('#like-' + i).attr('id', "like-" + mainData[i]._id);
+                        $('#edit-' + i).attr('id', "edit-" + mainData[i]._id);
+                        for (let c = 0; c < mainData[i].voters.length; c++) {
+                            if (mainData[i].voters[c] == sessionStorage['userId']) {
+                                document.getElementById("like-" + mainData[i]._id).innerHTML = "Unlike";
+                                break;
+                            }
+                        }
                     } else {
                         $('#del-' + i).hide();
                         $('#like-' + i).hide();
                     }
-                    $('#edit-' + i).attr('id', mainData[i]._id);
                     $('#display-' + i).attr('id', "display-" + mainData[i]._id);
                     $('#content-' + i).attr('id', "content-" + mainData[i]._id);
+
                 }
 
                 $('.deleteBtn').on('click', function (e) {
-                    let buttonId = this.id;
+                    let postId = this.id;
+                    postId = postId.split("-")[1];
                     vex.dialog.confirm({
                         message: 'Delete post?',
                         callback: function (value) {
                             if (value) {
-                                triggerEvent('deletePost', buttonId);
+                                triggerEvent('deletePost', postId);
                             }
                         }
                     });
@@ -95,7 +102,8 @@ class HomeView {
                 $('.likeBtn').on('click', function (ev) {
                     let updateData;
                     let postId = this.id;
-                    for (let i = 0; i < mainData.length; i++) {  //WILL SLEEP!
+                    postId = postId.split("-")[1];
+                    for (let i = 0; i < mainData.length; i++) {
                         if (mainData[i]._id == postId) {
                             updateData = mainData[i];
                             break;
@@ -107,7 +115,8 @@ class HomeView {
                 $('.editBtn').on('click', function (ev) {
                     let updateData;
                     let postId = this.id;
-                    for (let i = 0; i < mainData.length; i++) {  //WILL SLEEP!
+                    postId = postId.split("-")[1];
+                    for (let i = 0; i < mainData.length; i++) {
                         if (mainData[i]._id == postId) {
                             updateData = mainData[i];
                             break;

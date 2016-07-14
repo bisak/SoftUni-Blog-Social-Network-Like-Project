@@ -30,6 +30,11 @@ class UserController {
                 for (let i = 0; i < data.length && i < 5; i++) {
                     recentPosts.push(data[i]);
                 }
+
+                for (let i = 0; i < data.length; i++) {
+                    data[i].postId = i;
+                }
+
                 _that._userView.showUsersPage(recentPosts, data)
             },
             function error(data) {
