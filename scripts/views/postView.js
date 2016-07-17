@@ -35,6 +35,7 @@ class PostView {
                         gr: true,
                         gw: true
                     };
+
                     let data = {
                         _acl: permissions,
                         title: title,
@@ -42,7 +43,8 @@ class PostView {
                         content: content,
                         date: date,
                         votes: 0,
-                        voters: null
+                        voters: [],
+                        comments: []
                     };
                     triggerEvent('createPost', data);
                 });
@@ -78,11 +80,9 @@ class PostView {
                     let title = $('#title').val();
                     let content = tinyMCE.get('content').getContent();
                     let date = moment().format("MMMM Do YYYY");
-
                     data.title = title;
                     data.content = content;
                     data.date = date;
-
                     triggerEvent('editPostRequest', data);
                 });
             })

@@ -33,6 +33,8 @@ class HomeView {
                 $(".likeBtn").hide();
                 $(".downvoteBtn").hide();
                 $(".editBtn").hide();
+                $(".commentBtn").hide();
+                $(".commentTextarea").hide();
             });
         });
     }
@@ -56,7 +58,6 @@ class HomeView {
                 let renderedRecentPosts = Mustache.render(template, recentPosts);
                 $('.recent-posts').html(renderedRecentPosts);
             });
-
 
             $.get('templates/posts.html', function (template) {
                 let blogPosts = {
@@ -83,7 +84,9 @@ class HomeView {
                     }
                     $('#display-' + i).attr('id', "display-" + mainData[i]._id);
                     $('#content-' + i).attr('id', "content-" + mainData[i]._id);
-
+                    $('#comm-' + i).attr('id', "comm-" + mainData[i]._id);
+                    $('#commentText-' + i).attr('id', "commentText-" + mainData[i]._id);
+                    $('#commentsContainer-' + i).attr('id', "commentsContainer-" + mainData[i]._id);
                 }
 
                 $('.deleteBtn').on('click', function (e) {
@@ -128,6 +131,26 @@ class HomeView {
 
                 $("#sort-selector").on('change', function () {
                     triggerEvent('sortPosts', this.value)
+                });
+
+                $('.commentBtn').on('click', function (ev) {
+                    let updateData;
+                    let postId = this.id;
+                    postId = postId.split("-")[1];
+                    for (let i = 0; i < mainData.length; i++) {
+                        if (mainData[i]._id == postId) {
+                            updateData = mainData[i];
+                            break;
+                        }
+                    }
+                    let content = $('#commentText-' + postId).val();
+                    let author = sessionStorage['fullname'];
+                    let newComment = {
+                        content: content,
+                        author: author
+                    };
+                    updateData.comments.push(newComment);
+                    triggerEvent('commentPost', updateData);
                 });
             });
         });

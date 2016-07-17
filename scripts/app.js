@@ -81,7 +81,7 @@
         homeController.ratePost(data);
     });
 
-    bindEventHandler('editPost', function (ev, data) {
+    bindEventHandler('editPost', function (ev, data) { //TODO probably fix this with onroute!
         postController.showEditPostPage(data, authService.isLoggedIn());
     });
 
@@ -91,6 +91,10 @@
 
     bindEventHandler('sortPosts', function (ev, data) {
         homeController.showUserPage(data);
+    });
+
+    bindEventHandler('commentPost', function (ev, data) {
+        postController.commentPost(data);
     });
 
     run('#/');

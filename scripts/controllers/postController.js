@@ -53,14 +53,29 @@ class PostController {
         }
         let requestUrl = this._baseServiceUrl + requestData._id;
         delete requestData.postId;
-        console.log(requestData);
         this._requester.put(requestUrl, requestData,
             function success(data) {
-                showPopup('success', "You have successfully created a new post.");
+                showPopup('success', "You have successfully edited a post.");
                 redirectUrl("#/");
             },
             function error(data) {
-                showPopup('error', "An error has occurred while attempting to create a new post.");
+                showPopup('error', "An error has occurred while attempting to edit a post.");
+            });
+    }
+
+    commentPost(requestData) {
+        let requestUrl = this._baseServiceUrl + requestData._id;
+        delete requestData.postId;
+        let lastCommentContent = requestData.comments[requestData.comments.length-1].content;
+        let lastCommentAuthor = requestData.comments[requestData.comments.length-1].author;
+        this._requester.put(requestUrl, requestData,
+            function success(data) {
+                showPopup('success', "You have successfully commented a post.");
+                $("#commentsContainer-" + requestData._id).append("<p class='subtitle'>" + lastCommentContent + " by: " + lastCommentAuthor + "</p>");
+                $("#commentText-" + requestData._id).val('');
+        },
+            function error(data) {
+                showPopup('error', "An error has occurred while attempting to comment a post.");
             });
     }
 

@@ -114,7 +114,7 @@ class HomeController {
                 currentPostData = data;
             },
             function error(data) {
-                alert(data);
+                console.log(data);
             }
         );
 
