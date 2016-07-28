@@ -1,5 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Lato:400,300,700,900);
 @import url(https://fonts.googleapis.com/css?family=Oswald);
+@import url(https://fonts.googleapis.com/css?family=Indie+Flower|Noto+Sans|Poiret+One);
 
 * {
     margin: 0;
@@ -8,8 +9,8 @@
 
 body {
     line-height: 1;
-    font: 16px Lato;
-    color: #565656;
+    font: 16px Noto Sans;
+    color: #1F1209;
 }
 
 .wrapper {
@@ -22,11 +23,12 @@ body {
 }
 
 hr {
-    color: rgba(255, 255, 255, 0.5);
-    margin: 15px auto;
+    color: #834C24;
+    margin: 20px auto;
     border: none;
-    border-bottom: 1px solid white;
-    width: 60%;
+    border-bottom: 8px solid #834C24;
+    border-radius: 10px;
+    width: 70%;
 }
 
 
@@ -46,21 +48,22 @@ header {
 }
 
 .blog-title {
-    width: 120px;
-    font: 54px Oswald;
-    font-weight: 600;
-    margin: 0 auto 50px;
-    color: #565656;
+    width: 95%;
+    font: 40px Oswald;
+    margin: 0 auto 60px;
+    padding: 8px;
+    color: #003366;
     text-transform: uppercase;
     text-align: center;
-    border-bottom: 8px solid #019c8c;
+    border-bottom: 8px solid #834C24;
+    border-radius: 30px;
 }
 
 .sidebar {
     float: left;
     width: 20%;
     height: 100%;
-    background-color: #06C0AB;
+    background-color: #003366;
     color: white;
     font: 32px Lato;
     font-weight: 100;
@@ -78,7 +81,7 @@ header {
 
 .single-menu-element-link {
     text-decoration: none;
-    color: white;
+    color: #FFF8DC;
     -moz-transition-property: font-weight;
     -moz-transition-duration: 0.1s;
     -moz-transition-timing-function: linear;
@@ -87,7 +90,7 @@ header {
     -webkit-transition-duration: 0.1s;
     -webkit-transition-timing-function: linear;
     -webkit-transition-delay: 0.1s;
-    font-weight: 300;
+    font-weight: 600;
 }
 
 .single-menu-element-link:hover {
@@ -98,9 +101,12 @@ header {
 
 .single-menu-element:hover {
     font-weight: 900;
-    background-color: #019c8c;
-    height: 40px;
-    line-height: 32px;
+    background-color: #006699;
+    height: 30px;
+    line-height: 25px;
+    border-radius: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
     transition: background 0.2s ease, padding 0.2s linear;
 }
 

@@ -1,5 +1,5 @@
 <aside class="sidebar">
-    <div class="logo"><img src="images/logo_sidebar.png" alt=""></div>
+    <h2 class="recent-posts-title" style="margin-top: 20px;">Navigation</h2>
     <hr>
     <nav>
         <ul>
@@ -30,7 +30,6 @@
 
         <hr>
         <h2 class="recent-posts-title" id="recentsName">Recent Posts</h2>
-        <hr>
 
         <ul class="recent-posts">
         </ul>
@@ -38,11 +37,12 @@
 </aside>
 <main class="main-content">
     <header class="blog-title">
-        <h3>home</h3>
+        <h3>Front Page</h3>
     </header>
     <div id="sort-dropdown">
-        <select id="sort-selector" style="float: right; margin-right: 15%"> <!--This shit is as temporary as it can be.-->
-            <option selected="true" disabled>Sort by: </option>
+        <select id="sort-selector" style="float: right; margin-right: 15%">
+            <!--This shit is as temporary as it can be.-->
+            <option selected="true" disabled>Sort by:</option>
             <option value="votes-high">Votes High-Low</option>
             <option value="votes-low">Votes Low-High</option>
             <option value="newest">Newest First</option>
@@ -53,7 +53,11 @@
     </ul>
 
     <ul class="pagination">
-        <li><button id="backward" id=""><</button></li>
-        <li><button id="forward">></button></li>
+        <li>
+            <button id="backward" id=""><</button>
+        </li>
+        <li>
+            <button id="forward">></button>
+        </li>
     </ul>
 </main>

@@ -9,9 +9,9 @@
             <h3 class="title">{{title}}</h3>
         </div>
         <p class="subtitle">Posted on {{date}} by {{author}}</p>
-        <p class="votesDisplay" id="display-{{postId}}">Rating: {{votes}}</p>
+        <p class="subtitle" id="display-{{postId}}">Rating: {{votes}}</p>
         <div class="content" id="content-{{postId}}">{{content}}</div>
-        <p class="subtitle">Comments:</p>
+        <p class="subtitle" style="margin-top: 10px;">Comments:</p>
         <div id="commentsContainer-{{postId}}">
             {{#comments}}
             <p class="subtitle">{{content}} by: {{author}}</p>
@@ -19,8 +19,12 @@
         </div>
         <div class="commentsFieldsContainer">
             <textarea class="commentTextarea" id="commentText-{{postId}}"></textarea>
-            <button class="commentBtn" id="comm-{{postId}}" type="button">Comment</button>
+            <button class="commentBtn" id="comm-{{postId}}" type="button">Submit</button>
         </div>
+        <hr style="float:left; width: 85%; display: block">
     </article>
 </li>
+<br>
+<br>
+<br> <!--TODO FIX-->
 {{/blogPosts}}

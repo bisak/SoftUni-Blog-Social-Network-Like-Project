@@ -5,12 +5,12 @@ a {
 
 .dot {
     vertical-align: middle;
-    margin-top: 20px;
+    margin-top: 18px;
     margin-right: 10px;
     float: left;
-    width: 20px;
+    width: 22px;
     border-radius: 40px;
-    background-color: #019c8c;
+    background-color: #834C24;
 }
 
 .title {
@@ -25,20 +25,15 @@ a {
 
 
 .subtitle {
-    font: 16px Lato;
+    font: 14px Noto Sans;
     font-weight: 100;
     margin-left: 3%;
 }
 
-.votesDisplay {
-    font: 16px Lato;
-    font-weight: 100;
-    margin-left: 3%;
-}
 
 .content {
     margin-top: 10px;
-    font: 16px Arial;
+    font: 16px Lato;
     font-weight: 500;
     width: 80%;
     margin-left: 3%;
@@ -49,4 +44,6 @@ a {
     margin-left: 5%;
     list-style: none;
 }
+
+
 
