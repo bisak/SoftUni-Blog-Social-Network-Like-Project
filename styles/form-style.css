@@ -23,7 +23,7 @@ form {
 .form-title {
     font: 18px Oswald;
     font-weight: 400;
-    color: #019c8c;
+    color: #834C24;
     padding: 0 5px 5px;
     text-align: center;
     margin-bottom: 15px;
@@ -39,10 +39,10 @@ input {
 }
 
 input:focus {
-    font: 12px Lato;
+    font-size: 15px;
     font-weight: 100;
     outline: none;
-    border: 3px solid #06c0ab;
+    border: 3px solid #834C24;
 }
 
 #interests {
@@ -61,13 +61,13 @@ input:focus {
     font: 12px Lato;
     font-weight: 100;
     outline: none;
-    border: 3px solid #06c0ab;
+    border: 3px solid #834C24;
 }
 
 button {
     font: 16px Lato;
     color: white;
-    background-color: #06c0ab;
+    background-color: #003366;
     padding: 8px;
     margin-top: 15px;
     margin-bottom: 10px;
@@ -79,11 +79,12 @@ button {
 button:hover {
     opacity: 0.75;
     -webkit-transform: scale(1.08, 1.08);
+    /*TODO fix for other browsers*/
 }
 
 .form-link {
     text-decoration: none;
-    color: #048e76;
+    color: #834C24;
     font: 16px Lato;
     font-weight: 900;
     padding: 10px;
@@ -91,6 +92,10 @@ button:hover {
 
 #register-title {
     width: 200px;
+}
+
+#login-title {
+    width: 125px;
 }
 
 .commentTextarea {
@@ -101,4 +106,8 @@ button:hover {
 
 .commentsFieldsContainer{
     vertical-align: middle;
+}
+
+.title-form{
+    font-size: 1em;
 }

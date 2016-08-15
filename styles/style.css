@@ -95,19 +95,21 @@ header {
 
 .single-menu-element-link:hover {
     font-weight: 900;
-    transition: background 0.2s ease,
-    padding 0.2s linear;
+    transition: background 0.2s ease, padding 0.2s linear;
 }
 
 .single-menu-element:hover {
     font-weight: 900;
-    background-color: #006699;
-    height: 30px;
+    /*background-color: #006699;*/
+    -webkit-transform: scale(1.08);
+/*    height: 30px;
     line-height: 25px;
-    border-radius: 20px;
+    border-radius: 20px;*/
     margin-left: 10px;
     margin-right: 10px;
-    transition: background 0.2s ease, padding 0.2s linear;
+    /*transition: background 0.2s ease, padding 0.2s linear;*/
+
+    /*TODO fix*/
 }
 
 .single-menu-element {
@@ -123,11 +125,3 @@ header {
     padding: 10px;
     font-size: 18px;
 }
-
-footer {
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    text-align: center;
-}
-

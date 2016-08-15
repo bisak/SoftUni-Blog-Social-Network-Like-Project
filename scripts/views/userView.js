@@ -61,6 +61,7 @@ class UserView {
                 let rendered = Mustache.render(template, null);
                 $(_that._mainContentSelector).html(rendered);
 
+
                 $('#register-request-button').on('click', function (ev) {
                     let username = $('#username').val();
                     let password = $('#password').val();
@@ -108,12 +109,12 @@ class UserView {
                 let renderedUsers = Mustache.render(template, blogUsers);
                 $('.articles').html(renderedUsers);
 
-                for (let i = 3; i < mainData.length; i++) {
+                for (let i = 5; i < mainData.length; i++) {
                     $("#user-" + i).hide();
                 }
 
-                let first = 3;
-                let second = first + 3;
+                let first = 5;
+                let second = first + 5;
                 $("#forward").on('click', function () {
                     if (first < mainData.length) {
                         for (let i = first; i < second; i++) {
@@ -123,20 +124,20 @@ class UserView {
                             $("#user-" + i).hide();
                         }
                         first = second;
-                        second = first + 3;
+                        second = first + 5;
                     }
                 });
 
                 $("#backward").on('click', function () {
-                    if (first > 3) {
+                    if (first > 5) {
                         for (let i = 0; i < mainData.length; i++) {
                             $("#user-" + i).hide();
                         }
-                        for (let i = first - 6; i < first - 3; i++) {
+                        for (let i = first - 10; i < first - 5; i++) {
                             $("#user-" + i).show();
                         }
-                        first = first - 3;
-                        second = second - 3;
+                        first = first - 5;
+                        second = second - 5;
                     }
                 });
             });

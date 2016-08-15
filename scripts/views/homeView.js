@@ -80,7 +80,7 @@ class HomeView {
                         }
                     } else {
                         $('#del-' + i).hide();
-                        $('#like-' + i).hide();
+                        $('#edit-' + i).hide();
                     }
                     $('#display-' + i).attr('id', "display-" + mainData[i]._id);
                     $('#content-' + i).attr('id', "content-" + mainData[i]._id);
@@ -89,6 +89,7 @@ class HomeView {
                     $('#commentsContainer-' + i).attr('id', "commentsContainer-" + mainData[i]._id);
                 }
 
+                vex.defaultOptions.className = 'vex-theme-default';
                 $('.deleteBtn').on('click', function (e) {
                     let postId = this.id;
                     postId = postId.split("-")[1];

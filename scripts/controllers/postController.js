@@ -66,14 +66,14 @@ class PostController {
     commentPost(requestData) {
         let requestUrl = this._baseServiceUrl + requestData._id;
         delete requestData.postId;
-        let lastCommentContent = requestData.comments[requestData.comments.length-1].content;
-        let lastCommentAuthor = requestData.comments[requestData.comments.length-1].author;
+        let lastCommentContent = requestData.comments[requestData.comments.length - 1].content;
+        let lastCommentAuthor = requestData.comments[requestData.comments.length - 1].author;
         this._requester.put(requestUrl, requestData,
             function success(data) {
                 showPopup('success', "You have successfully commented a post.");
                 $("#commentsContainer-" + requestData._id).append("<p class='subtitle'>" + lastCommentContent + " by: " + lastCommentAuthor + "</p>");
                 $("#commentText-" + requestData._id).val('');
-        },
+            },
             function error(data) {
                 showPopup('error', "An error has occurred while attempting to comment a post.");
             });
