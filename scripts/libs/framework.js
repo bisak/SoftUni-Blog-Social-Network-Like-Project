@@ -1,6 +1,7 @@
 //DOCUMENTATION https://github.com/SoftUni-ES-BlackBox-Framework/blackbox
 
 class Requester {
+    /*Handle requests*/
     constructor(authorizationService) {
         this.authorizationService = authorizationService;
     }
@@ -31,25 +32,26 @@ class Requester {
             url: url,
             headers: headers,
             data: JSON.stringify(data) || null,
-            beforeSend: function () {
+            /*ANIMATIONS are commented*/
+            /*beforeSend: function () {
                 if ($("#loader-modal").length) {
                     $("#loader-modal").css("display", "block");
-                   // $(".wrapper").css("display", "none");
+                    // $(".wrapper").css("display", "none");
 
                 }
-            },
+            },*/
             success: successCallBack,
-            error: errorCallBack,
+            error: errorCallBack
+            /*Animation*/
+            /*,
             complete: function () {
-                setTimeout(function () {
-                    if ($("#loader-modal").length) {
-                        $("#loader-modal").css("display", "none");
-                        $(".wrapper").css("display", "inline-block");
-                        $(".body").css("background-color", "FFF");
-                    }
-                }, 0); //TODO remove delay, here for animation testing purposes
+                if ($("#loader-modal").length) {
+                    $("#loader-modal").css("display", "none");
+                    $(".wrapper").css("display", "inline-block");
+                    $(".body").css("background-color", "FFF");
+                }
             },
-            //async: false
+            //async: false*/
         });
     }
 
@@ -107,11 +109,11 @@ class AuthorizationService {
 }
 
 function showPopup(type, text, position) {
-
+    /*Handle notifications*/
     function _showSuccessPopup(text, position) {
         noty({
             text: text,
-            timeout: 2000,
+            timeout: 1500,
             layout: 'top',
             type: 'success'
         });
@@ -120,7 +122,7 @@ function showPopup(type, text, position) {
     function _showInfoPopup(text, position) {
         noty({
             text: text,
-            timeout: 2000,
+            timeout: 1500,
             layout: 'top',
             type: 'information'
         });
@@ -129,7 +131,7 @@ function showPopup(type, text, position) {
     function _showWarningPopup(text, position) {
         noty({
             text: text,
-            timeout: 2000,
+            timeout: 1500,
             layout: 'top',
             type: 'warning'
         });
@@ -138,7 +140,7 @@ function showPopup(type, text, position) {
     function _showErrorPopup(text, position) {
         noty({
             text: text,
-            timeout: 2000,
+            timeout: 1500,
             layout: 'top',
             type: 'error'
         });
@@ -160,8 +162,7 @@ function showPopup(type, text, position) {
     }
 }
 
-
-// EVENT SERVICES
+/*Handle events*/
 
 let _isInstanced = false;
 let _router;
@@ -170,15 +171,12 @@ function initEventServices() {
     if (_isInstanced) {
         return;
     }
-
     _router = Sammy(function () {
         //Here we put all pre-initialized functions, event handlers, and so on...
-
         this.bind('redirectUrl', function (ev, url) {
             this.redirect(url);
         });
     });
-
     _isInstanced = true;
 }
 
@@ -187,29 +185,26 @@ function redirectUrl(url) {
         this.trigger('redirectUrl', url);
     });
 }
-
 function bindEventHandler(event, eventHandler) {
     Sammy(function () {
         this.bind(event, eventHandler);
     });
 }
-
 function onRoute(route, routeHandler) {
     Sammy(function () {
         this.get(route, routeHandler);
     });
 }
-
 function triggerEvent(event, data) {
     Sammy(function () {
         this.trigger(event, data);
     });
 }
-
 function run(rootUrl) {
     _router.run(rootUrl);
 }
 
+/*HTML Editor options/handling*/
 function initHtmlEditor() {
     if (tinymce.editors.length > 0) {
         tinymce.remove();
@@ -235,6 +230,7 @@ function initHtmlEditor() {
     });
 }
 
+/*Function to calculate user's age*/
 function getAge(dateString) {
     var today = new Date();
     var birthDate = new Date(dateString);

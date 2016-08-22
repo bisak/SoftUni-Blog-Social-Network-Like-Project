@@ -4,64 +4,51 @@ class UserView {
         this._mainContentSelector = mainContentSelector;
     }
 
+    /*Render login page*/
     showLoginPage(isLoggedIn) {
         let _that = this;
-
         let templateUrl;
-
         if (isLoggedIn) {
             templateUrl = "templates/form-user.html";
         } else {
             templateUrl = "templates/form-guest.html";
         }
-
         $.get(templateUrl, function (template) {
             let renderedWrapper = Mustache.render(template, null);
             $(_that._wrapperSelector).html(renderedWrapper);
-
             $.get('templates/login.html', function (template) {
-
                 let rendered = Mustache.render(template, null);
-
                 $(_that._mainContentSelector).html(rendered);
-
+                /*Get login data on button click and trigger login event*/
                 $('#login-request-button').on('click', function (ev) {
                     let username = $('#username').val();
                     let password = $('#password').val();
-
                     let data = {
                         username: username,
                         password: password
                     };
-
                     triggerEvent('login', data);
                 });
             });
         });
     }
 
+    /*Render register page*/
     showRegisterPage(isLoggedIn) {
         let _that = this;
-
         let templateUrl;
-
         if (isLoggedIn) {
             templateUrl = "templates/form-user.html";
         } else {
             templateUrl = "templates/form-guest.html";
         }
-
         $.get(templateUrl, function (template) {
-
             let renderedWrapper = Mustache.render(template, null);
-
             $(_that._wrapperSelector).html(renderedWrapper);
-
             $.get('templates/register.html', function (template) {
                 let rendered = Mustache.render(template, null);
                 $(_that._mainContentSelector).html(rendered);
-
-
+                /*Perform actions on button click and trigger register event*/
                 $('#register-request-button').on('click', function (ev) {
                     let username = $('#username').val();
                     let password = $('#password').val();
@@ -69,8 +56,8 @@ class UserView {
                     let confirmPassword = $('#pass-confirm').val();
                     let interests = $('#interests').val();
                     let birthday = $('#birthday').val();
+                    /*Calculate age based on birthday*/
                     let age = getAge(birthday);
-
                     let data = {
                         username: username,
                         password: password,
@@ -79,13 +66,13 @@ class UserView {
                         age: age,
                         confirmPassword: confirmPassword
                     };
-
                     triggerEvent('register', data);
                 });
             });
         });
     }
 
+    /*Render users page*/
     showUsersPage(sideBarData, mainData) {
         let _that = this;
         $.get('templates/welcome-user.html', function (template) {
@@ -93,7 +80,6 @@ class UserView {
             $(_that._wrapperSelector).html(renderedWrapper);
             $("#sort-selector").hide();
             document.getElementById("recentsName").innerHTML = "Recent Users";
-
             $.get('templates/recent-users.html', function (template) {
                 let recentUsers = {
                     recentUsers: sideBarData
@@ -101,7 +87,6 @@ class UserView {
                 let renderedRecentUsers = Mustache.render(template, recentUsers);
                 $('.recent-posts').html(renderedRecentUsers);
             });
-
             $.get('templates/users.html', function (template) {
                 let blogUsers = {
                     blogUsers: mainData
@@ -109,12 +94,20 @@ class UserView {
                 let renderedUsers = Mustache.render(template, blogUsers);
                 $('.articles').html(renderedUsers);
 
+                /*
+                  weird
+                PAGINATION
+                */
+
+                /*Hide all users except first 5*/
                 for (let i = 5; i < mainData.length; i++) {
                     $("#user-" + i).hide();
                 }
 
                 let first = 5;
                 let second = first + 5;
+
+                /*Handle events on forward button click*/
                 $("#forward").on('click', function () {
                     if (first < mainData.length) {
                         for (let i = first; i < second; i++) {
@@ -128,6 +121,7 @@ class UserView {
                     }
                 });
 
+                /*Handle events on backward button click*/
                 $("#backward").on('click', function () {
                     if (first > 5) {
                         for (let i = 0; i < mainData.length; i++) {

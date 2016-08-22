@@ -15,8 +15,10 @@ class PostController {
     }
 
     createPost(requestData) {
+        /*Verify posts*/
+        let requestUrl = this._baseServiceUrl;
         if (requestData.title.length > 50) {
-            showPopup('error', "Post title must consist of less than 60 symbols.");
+            showPopup('error', "Post title must consist of less than 50 symbols.");
             return;
         }
         if (requestData.title.length < 6) {
@@ -27,10 +29,12 @@ class PostController {
             showPopup('error', "Post content must consist of atleast 10 symbols.");
             return;
         }
-        let requestUrl = this._baseServiceUrl;
+
+        /*Request to create post*/
         this._requester.post(requestUrl, requestData,
             function success(data) {
                 showPopup('success', "You have successfully created a new post.");
+                /*Redirect to homepage on success*/
                 redirectUrl("#/");
             },
             function error(data) {
@@ -39,6 +43,8 @@ class PostController {
     }
 
     editPost(requestData) {
+        /*Verify edits*/
+        let requestUrl = this._baseServiceUrl + requestData._id;
         if (requestData.title.length > 50) {
             showPopup('error', "Post title must consist of less than 60 symbols.");
             return;
@@ -51,11 +57,13 @@ class PostController {
             showPopup('error', "Post content must consist of atleast 10 symbols.");
             return;
         }
-        let requestUrl = this._baseServiceUrl + requestData._id;
         delete requestData.postId;
+
+        /*Request to update the data*/
         this._requester.put(requestUrl, requestData,
             function success(data) {
                 showPopup('success', "You have successfully edited a post.");
+                /*Redirect to homepage on success*/
                 redirectUrl("#/");
             },
             function error(data) {
@@ -66,17 +74,16 @@ class PostController {
     commentPost(requestData) {
         let requestUrl = this._baseServiceUrl + requestData._id;
         delete requestData.postId;
-        let lastCommentContent = requestData.comments[requestData.comments.length - 1].content;
-        let lastCommentAuthor = requestData.comments[requestData.comments.length - 1].author;
+        let CommentContent = requestData.comments[requestData.comments.length - 1].content;
+        let CommentAuthor = requestData.comments[requestData.comments.length - 1].author;
         this._requester.put(requestUrl, requestData,
             function success(data) {
                 showPopup('success', "You have successfully commented a post.");
-                $("#commentsContainer-" + requestData._id).append("<p class='subtitle'>" + lastCommentContent + " by: " + lastCommentAuthor + "</p>");
+                $("#commentsContainer-" + requestData._id).append("<p class='subtitle'>" + CommentContent + " by: " + CommentAuthor + "</p>");
                 $("#commentText-" + requestData._id).val('');
             },
             function error(data) {
-                showPopup('error', "An error has occurred while attempting to comment a post.");
+                showPopup('error', "An error has occurred while attempting to comment.");
             });
     }
-
 }

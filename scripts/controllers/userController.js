@@ -16,9 +16,10 @@ class UserController {
 
     showUsersPage() {
         let _that = this;
-        let recentPosts = [];
+        let recentUsers = [];
         let requestUrl = this._baseServiceUrl;
 
+        /*Get users*/
         this._requester.get(requestUrl,
             function success(data) {
                 data.sort(function (elem1, elem2) {
@@ -26,16 +27,13 @@ class UserController {
                     let date2 = new Date(elem2._kmd.ect);
                     return date2 - date1;
                 });
-
                 for (let i = 0; i < data.length && i < 5; i++) {
-                    recentPosts.push(data[i]);
+                    recentUsers.push(data[i]);
                 }
-
                 for (let i = 0; i < data.length; i++) {
                     data[i].postId = i;
                 }
-
-                _that._userView.showUsersPage(recentPosts, data)
+                _that._userView.showUsersPage(recentUsers, data)
             },
             function error(data) {
                 showPopup('error', "Error loading users.");
@@ -43,12 +41,13 @@ class UserController {
         );
     }
 
+    /*Perform login*/
     login(requestData) {
         let requestUrl = this._baseServiceUrl + "login";
-
         this._requester.post(requestUrl, requestData,
             function success(data) {
                 showPopup('success', "Successfull login.");
+                /*Save credentials in sessionstorage for use in other classes*/
                 sessionStorage['_authToken'] = data._kmd.authtoken;
                 sessionStorage['username'] = data.username;
                 sessionStorage['fullname'] = data.fullname;
@@ -58,48 +57,41 @@ class UserController {
             function error(data) {
                 showPopup('error', "Login error.");
             });
-
     }
 
+    /*Perform register*/
     register(requestData) {
+        /*Verify register data*/
         if (requestData.username.length < 6) {
             showPopup('error', "Username too short.");
             return;
         }
-
         if (requestData.fullname.length < 6) {
             showPopup('error', "Full name too short.");
             return;
         }
-
         if (requestData.password.length < 6) {
             showPopup('error', "Password too short.");
             return;
         }
-
         if (requestData.interests.length > 100) {
             showPopup('error', "Too many interests");
             return;
         }
-
         if (requestData.age < 14) {
             showPopup('error', "Should be 14 or older to register");
             return;
         }
-
         if (requestData.password !== requestData.confirmPassword) {
             showPopup('error', "Passwords don't mach.");
             return;
         }
-
-
         delete requestData['confirmPassword'];
-
         let requestUrl = this._baseServiceUrl;
-
         this._requester.post(requestUrl, requestData,
             function success(data) {
                 showPopup('success', "Successfull registration.");
+                /*Automatically login after successful registration*/
                 triggerEvent('login', data);
             },
             function error(data) {

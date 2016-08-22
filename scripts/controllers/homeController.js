@@ -8,11 +8,9 @@ class HomeController {
 
     showGuestPage() {
         let _that = this;
-
         let recentPosts = [];
-
         let requestUrl = this._baseServiceUrl + /appdata/ + this._appkey + "/posts";
-
+        /*GET request to server to get posts*/
         this._requester.get(requestUrl,
             function success(data) {
                 data.sort(function (elem1, elem2) {
@@ -20,16 +18,15 @@ class HomeController {
                     let date2 = new Date(elem2.votes);
                     return date2 - date1;
                 });
-
+                /*Sidebar data*/
                 for (let i = 0; i < data.length; i++) {
                     data[i].postId = i;
                     recentPosts.push(data[i]);
                 }
-
                 _that._homeView.showGuestPage(recentPosts, data)
-            },
+            },/*Handle errors*/
             function error(data) {
-                showPopup('error', "Error loading posts.");
+                showPopup('error', "Error getting posts from server.");
             }
         );
     }
@@ -37,16 +34,15 @@ class HomeController {
     showUserPage(sorting) {
         let _that = this;
         let recentPosts = [];
-
         let requestUrl = this._baseServiceUrl + /appdata/ + this._appkey + "/posts";
-
-        if (sorting == undefined) {
+        /*Default sorting*/
+        if (sorting === undefined) {
             sorting = "votes-high";
         }
-
-
+        /*GET request to server to get posts*/
         this._requester.get(requestUrl,
             function success(data) {
+            /*Select sorting*/
                 if (sorting == "votes-high") {
                     data.sort(function (elem1, elem2) {
                         let date1 = new Date(elem1.votes);
@@ -73,19 +69,20 @@ class HomeController {
                         return date2 - date1;
                     });
                 }
-
+                /*Sidebar data*/
                 for (let i = 0; i < data.length; i++) {
                     data[i].postId = i;
                     recentPosts.push(data[i]);
                 }
                 _that._homeView.showUserPage(recentPosts, data)
-            },
+            },/*Handle errors*/
             function error(data) {
                 showPopup('error', "Error loading posts.");
             }
         );
     }
 
+    /*Handle post deleting*/
     deletePost(postId) {
         let requestUrl = this._baseServiceUrl + /appdata/ + this._appkey + "/posts/?query={\"_id\":" + "\"" + postId + "\"" + "}";
         this._requester.delete(requestUrl,
@@ -102,28 +99,31 @@ class HomeController {
         );
     }
 
+    /*Handle post rating*/
     ratePost(updateData) {
+        /*Settign AJAX to run synchronously because to temporary solve some problems*/
+        $.ajaxSetup({async: false});
         let votes = updateData.votes;
         let postId = updateData._id;
         let requestUrlPost = this._baseServiceUrl + /appdata/ + this._appkey + "/posts/" + postId;
-
         let currentPostData;
-        $.ajaxSetup({async: false}); //stupid
-        this._requester.get(requestUrlPost,
+        let verifyUserId;
+
+        /*Request to verify that userId is not changed in session storage*/
+        this._requester.get("https://baas.kinvey.com/user/kid_rJCVNesB/" + sessionStorage['userId'],
             function success(data) {
-                currentPostData = data;
+                verifyUserId = true;
             },
             function error(data) {
-                console.log(data);
+                verifyUserId = false;
             }
         );
 
-        let hasVoted = false;
-        let indexOfVoter;
-
-        if (!currentPostData.voters) {
-            currentPostData.voters = [];
-        } else {
+        /*If userId is correct, vote post*/
+        if (verifyUserId) {
+            currentPostData = updateData;
+            /*Check if user has already voted for post*/
+            let hasVoted = false;
             for (let i = 0; i < currentPostData.voters.length; i++) {
                 if (currentPostData.voters[i] == sessionStorage['userId']) {
                     hasVoted = true;
@@ -133,28 +133,29 @@ class HomeController {
                     hasVoted = false;
                 }
             }
-        }
 
-        if (hasVoted == true) {
-            currentPostData.votes -= 1;
-            document.getElementById("like-" + postId).innerHTML = "Like";
-        } else {
-            currentPostData.votes += 1;
-            currentPostData.voters.push(sessionStorage['userId']); //TODO fix sessionStorage...
-            document.getElementById("like-" + postId).innerHTML = "Unlike";
-        }
-
-
-        this._requester.put(requestUrlPost, currentPostData,
-            function success(data) {
-                document.getElementById("display-" + postId).innerHTML = "Rating: " + data.votes;
-                showPopup('success', "You have successfully rated a post.");
-            },
-            function error(data) {
-                showPopup('error', "Error rating a post. Error message => " + JSON.stringify(data));
+            /*If voted, unvote and vice-versa*/
+            if (hasVoted == true) {
+                currentPostData.votes -= 1;
+                document.getElementById("like-" + postId).innerHTML = "Like";
+            } else {
+                currentPostData.votes += 1;
+                currentPostData.voters.push(sessionStorage['userId']);
+                document.getElementById("like-" + postId).innerHTML = "Unlike";
             }
-        );
-        $.ajaxSetup({async: true});
-    }
 
+            /*Update data on server*/
+            this._requester.put(requestUrlPost, currentPostData,
+                function success(data) {
+                    document.getElementById("display-" + postId).innerHTML = "Rating: " + data.votes;
+                    showPopup('success', "You have successfully rated a post.");
+                },
+                function error(data) {
+                    showPopup('error', "Error rating a post. Error message => " + JSON.stringify(data));
+                }
+            );
+            /*Return AJAX to normal asynchronous operation*/
+            $.ajaxSetup({async: true});
+        }
+    }
 }

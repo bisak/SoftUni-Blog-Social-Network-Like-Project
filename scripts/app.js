@@ -57,7 +57,7 @@
     onRoute('#/posts/create', function () {
         let data = {
             fullname: sessionStorage['fullname']
-        };//TODO fix??
+        };
         postController.showCreatePostPage(data, authService.isLoggedIn());
     });
 
@@ -81,7 +81,7 @@
         homeController.ratePost(data);
     });
 
-    bindEventHandler('editPost', function (ev, data) { //TODO probably fix this with onroute!
+    bindEventHandler('editPost', function (ev, data) {
         postController.showEditPostPage(data, authService.isLoggedIn());
     });
 
