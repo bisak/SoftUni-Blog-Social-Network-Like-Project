@@ -152,6 +152,8 @@ class HomeView {
                     }
                     let content = $('#commentText-' + postId).val();
                     let author = sessionStorage['username'];
+                    content = escapeHtml(content);
+                    author = escapeHtml(author);
                     let newComment = {
                         content: content,
                         author: author

@@ -24,6 +24,8 @@ class PostView {
                 $('#create-new-post-request-button').on('click', function (ev) {
                     let title = $('#title').val();
                     let author = $('#author').val();
+                    title = escapeHtml(title);
+                    author = escapeHtml(author);
                     let content = tinyMCE.get('content').getContent();
                     let date = moment().format("MMMM Do YYYY");
                     /*Set permissions to global write/read to enable other users to like posts later*/
@@ -71,6 +73,7 @@ class PostView {
                     let title = $('#title').val();
                     let content = tinyMCE.get('content').getContent();
                     let date = moment().format("MMMM Do YYYY");
+                    title = escapeHtml(title);
                     data.title = title;
                     data.content = content;
                     data.date = date;

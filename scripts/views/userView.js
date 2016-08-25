@@ -56,6 +56,11 @@ class UserView {
                     let confirmPassword = $('#pass-confirm').val();
                     let interests = $('#interests').val();
                     let birthday = $('#birthday').val();
+
+                    username = escapeHtml(username);
+                    fullname = escapeHtml(fullname);
+                    interests = escapeHtml(interests);
+
                     /*Calculate age based on birthday*/
                     let age = getAge(birthday);
                     let data = {

@@ -34,24 +34,24 @@ class Requester {
             data: JSON.stringify(data) || null,
             /*ANIMATIONS are commented*/
             /*beforeSend: function () {
-                if ($("#loader-modal").length) {
-                    $("#loader-modal").css("display", "block");
-                    // $(".wrapper").css("display", "none");
+             if ($("#loader-modal").length) {
+             $("#loader-modal").css("display", "block");
+             // $(".wrapper").css("display", "none");
 
-                }
-            },*/
+             }
+             },*/
             success: successCallBack,
             error: errorCallBack
             /*Animation*/
             /*,
-            complete: function () {
-                if ($("#loader-modal").length) {
-                    $("#loader-modal").css("display", "none");
-                    $(".wrapper").css("display", "inline-block");
-                    $(".body").css("background-color", "FFF");
-                }
-            },
-            //async: false*/
+             complete: function () {
+             if ($("#loader-modal").length) {
+             $("#loader-modal").css("display", "none");
+             $(".wrapper").css("display", "inline-block");
+             $(".body").css("background-color", "FFF");
+             }
+             },
+             //async: false*/
         });
     }
 
@@ -240,4 +240,20 @@ function getAge(dateString) {
         age--;
     }
     return age;
+}
+
+/*Important for escaping html (scripts)*/
+let entityMap = {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': '&quot;',
+    "'": '&#39;',
+    "/": '&#x2F;'
+};
+
+function escapeHtml(string) {
+    return String(string).replace(/[&<>"'\/]/g, function (s) {
+        return entityMap[s];
+    });
 }
