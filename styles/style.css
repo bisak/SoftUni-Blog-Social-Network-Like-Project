@@ -5,7 +5,9 @@
 * {
     margin: 0;
     padding: 0;
+    outline: 0;
 }
+
 
 body {
     line-height: 1;
@@ -30,7 +32,6 @@ hr {
     border-radius: 10px;
     width: 70%;
 }
-
 
 main {
     margin: 0 auto;
@@ -102,9 +103,9 @@ header {
     font-weight: 900;
     /*background-color: #006699;*/
     -webkit-transform: scale(1.08);
-/*    height: 30px;
-    line-height: 25px;
-    border-radius: 20px;*/
+    /*    height: 30px;
+        line-height: 25px;
+        border-radius: 20px;*/
     margin-left: 10px;
     margin-right: 10px;
     /*transition: background 0.2s ease, padding 0.2s linear;*/

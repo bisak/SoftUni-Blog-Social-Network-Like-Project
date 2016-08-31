@@ -24,7 +24,7 @@ class PostView {
                 $('#create-new-post-request-button').on('click', function (ev) {
                     $('#create-new-post-request-button').prop('disabled', true);
                     let title = $('#title').val();
-                    let author = $(data.fullname).val();
+                    let author = $('#author').val();
                     title = escapeHtml(title);
                     author = escapeHtml(author);
                     let content = tinyMCE.get('content').getContent();

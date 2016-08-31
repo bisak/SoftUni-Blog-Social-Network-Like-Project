@@ -73,6 +73,8 @@ class PostController {
 
     commentPost(requestData) {
         let requestUrl = this._baseServiceUrl + requestData._id;
+        $("#comm-" + requestData._id).prop('disabled', true);
+        console.log(requestData);
         delete requestData.postId;
         let commentContent = requestData.comments[requestData.comments.length - 1].content;
         let commentAuthor = requestData.comments[requestData.comments.length - 1].author;
@@ -85,9 +87,11 @@ class PostController {
                 showPopup('success', "You have successfully commented a post.");
                 $("#commentsContainer-" + requestData._id).append("<p class='subtitle'>" + commentContent + " by: " + commentAuthor + "</p>");
                 $("#commentText-" + requestData._id).val('');
+                $("#comm-" + requestData._id).prop('disabled', false);
             },
             function error(data) {
                 showPopup('error', "An error has occurred while attempting to comment.");
+                $("#comm-" + requestData._id).prop('disabled', false);
             });
     }
 
