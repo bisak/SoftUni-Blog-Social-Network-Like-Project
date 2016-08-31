@@ -22,8 +22,9 @@ class PostView {
                 /*Run HTML Editor*/
                 initHtmlEditor();
                 $('#create-new-post-request-button').on('click', function (ev) {
+                    $('#create-new-post-request-button').prop('disabled', true);
                     let title = $('#title').val();
-                    let author = $('#author').val();
+                    let author = $(data.fullname).val();
                     title = escapeHtml(title);
                     author = escapeHtml(author);
                     let content = tinyMCE.get('content').getContent();
@@ -70,6 +71,7 @@ class PostView {
                 /*Run HTML Editor*/
                 initHtmlEditor();
                 $('#create-new-post-request-button').on('click', function (ev) {
+                    $('#create-new-post-request-button').prop('disabled', true);
                     let title = $('#title').val();
                     let content = tinyMCE.get('content').getContent();
                     let date = moment().format("MMMM Do YYYY");

@@ -74,11 +74,11 @@
     });
 
     bindEventHandler('deletePost', function (ev, data) {
-        homeController.deletePost(data);
+        postController.deletePost(data);
     });
 
     bindEventHandler('ratePost', function (ev, data) {
-        homeController.ratePost(data);
+        postController.ratePost(data);
     });
 
     bindEventHandler('editPost', function (ev, data) {
