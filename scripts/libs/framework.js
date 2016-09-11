@@ -242,7 +242,7 @@ function getAge(dateString) {
     return age;
 }
 
-/*Important for escaping html (scripts)*/
+/*Important for escaping scripts*/
 let entityMap = {
     "&": "&amp;",
     "<": "&lt;",

@@ -13,6 +13,7 @@ body {
     line-height: 1;
     font: 16px Noto Sans;
     color: #1F1209;
+    background-color: #f5f5f5;
 }
 
 .wrapper {
@@ -100,17 +101,10 @@ header {
 }
 
 .single-menu-element:hover {
-    font-weight: 900;
-    /*background-color: #006699;*/
     -webkit-transform: scale(1.08);
-    /*    height: 30px;
-        line-height: 25px;
-        border-radius: 20px;*/
     margin-left: 10px;
     margin-right: 10px;
-    /*transition: background 0.2s ease, padding 0.2s linear;*/
 
-    /*TODO fix*/
 }
 
 .single-menu-element {

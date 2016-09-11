@@ -30,7 +30,7 @@ form {
 }
 
 input {
-    border-radius: 30px;
+    border-radius: 10px;
     border: 3px solid #f2f2f2;
     width: 60%;
     height: 35px;
@@ -100,7 +100,7 @@ button:hover {
 
 .commentTextarea {
     margin-left: 3%;
-    border-radius: 10px;
+    border-radius: 5px;
     background-color: #dddddd;
 }
 
